@@ -1,4 +1,6 @@
-R
-=
+#R Scripts
 
-R scripts
+
+###save_plot_png.r
+	dev.copy(png,filename="plot.png");
+	dev.off ();
