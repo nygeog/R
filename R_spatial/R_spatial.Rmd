@@ -1,0 +1,74 @@
+---
+title: "R_spatial"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+##From:
+[Spatial data in R: using R as a GIS (old version)](https://sites.google.com/site/rodriguezsanchezf/news/usingrasagis)
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+
+setwd("~/UsingR-GIS")
+ 
+ 
+### Basic packages ###
+ 
+library(sp)             # classes for spatial data
+library(raster)         # grids, rasters
+library(rasterVis)      # raster visualisation
+library(maptools)
+
+install
+library(rworldmap)   # visualising (global) spatial data
+ 
+  # examples:
+  newmap <- getMap(resolution="medium", projection="none")
+  plot(newmap)
+ 
+  mapCountryData()
+  mapCountryData(mapRegion="europe")
+  mapGriddedData()
+  mapGriddedData(mapRegion="europe")
+ 
+```
+
+
+```{r}
+library(dismo)
+ 
+  # Some examples
+  # Getting maps for countries
+  mymap <- gmap("France")   # choose whatever country
+  plot(mymap)
+  mymap <- gmap("Spain", type="satellite")   # choose map type
+  plot(mymap)
+  mymap <- gmap("Spain", type="satellite", exp=3)  # choose the zoom level
+  plot(mymap)
+  mymap <- gmap("Spain", type="satellite", exp=8)
+  plot(mymap)
+ 
+  mymap <- gmap("Spain", type="satellite", filename="Spain.gmap")    # save the
+map as a file in your wd for future use
+ 
+  # Now get a map for a region drawn at hand
+  mymap <- gmap("Europe")
+  plot(mymap)
+  select.area <- drawExtent()   # now click on the map to select your region
+  mymap <- gmap(select.area)
+  plot(mymap)
+  # See ?gmap for many other possibilities
+
+```
+
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
