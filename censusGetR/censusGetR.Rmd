@@ -33,7 +33,7 @@ censusVars <- 'B01003_001E'
 
 durl = paste('http://api.census.gov/data/',censusYear,'/',censusType,'?key=30699f15ab4d04a1e0943715b539d256c9a3ee44&for=',censusGeog,':*&in=state:',censusState,'&get=',censusVars, sep="")
 url <- getURL(durl)
-url
+# url
 json_file = paste(censusDirectory,'/','test.json', sep="")
 json_file
 download.file(durl, json_file)
