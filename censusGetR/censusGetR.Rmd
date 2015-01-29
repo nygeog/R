@@ -1,0 +1,47 @@
+---
+title: "CensusGetR"
+author: "DanielMSheehan"
+date: "January 29, 2015"
+output: html_document
+---
+
+#CensusGetR
+
+This is an R Markdown document for a function that grabs [United States Census Data](http://www.census.gov/data/developers/data-sets.html) from the API.
+
+```{r}
+library(RCurl)
+library(rjson)
+
+censusDirectory <- '/Users/danielmsheehan/GitHub/R/censusGetR/censusGetR_data'
+
+censusType <- 'acs5'
+censusYear <- '2012'
+censusGeog <- 'tract'
+censusState<- '36'
+censusVars <- 'B01003_001E'
+
+# censusGetR <- function(censusDirectory, censusType, censusYear, censusGeog, censusState, censusVars) {
+#   durl = paste('http://api.census.gov/data/',censusYear,'/',censusType,'?key=30699f15ab4d04a1e0943715b539d256c9a3ee44&for=',censusGeog,':*&in=state:',censusState,'&get=',censusVars,".json", sep="")
+#   url <- getURL(durl)
+#   url
+#  cendf <- fromJSON(file=url)
+#   cendf
+# }
+
+# censusGetR(censusDirectory, censusType, censusYear, censusGeog, censusState, censusVars)
+
+durl = paste('http://api.census.gov/data/',censusYear,'/',censusType,'?key=30699f15ab4d04a1e0943715b539d256c9a3ee44&for=',censusGeog,':*&in=state:',censusState,'&get=',censusVars, sep="")
+url <- getURL(durl)
+url
+json_file = paste(censusDirectory,'/','test.json', sep="")
+json_file
+download.file(durl, json_file)
+cendf <- fromJSON(file=json_file)
+csv_file = paste(censusDirectory,'/','test.csv', sep="")
+write.table(cendf, file = csv_file,row.names=FALSE, col.names=TRUE, sep=",")          
+              
+head(cendf, 10)
+```
+
+
